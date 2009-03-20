@@ -27,3 +27,17 @@ Scenario: Grid all X's
         ---------
         X | X | X
         """
+
+Scenario: Grid partial
+    Given the following grid:
+        |X|O| |
+        | |X|O|
+        |O| |X|
+    Then the grid should display
+        """
+        X | O |  
+        ---------
+          | X | O
+        ---------
+        O |   | X
+        """
