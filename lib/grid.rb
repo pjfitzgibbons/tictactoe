@@ -6,6 +6,8 @@ class Array
   include GridArrayExtensions
 end
 
+require 'state-machine'
+
 # Representing 3 x 3 Tic Tac Toe grid of space, X's and O's.
 class Grid
   #Create new empty grid or pre-populated grid with input 2-d Array (see #validate)

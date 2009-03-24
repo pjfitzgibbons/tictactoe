@@ -1,3 +1,3 @@
 default: --format profile features
 autotest: --format pretty features
-autotest-all: --format progress features
+autotest-all: --format pretty features
