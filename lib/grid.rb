@@ -6,34 +6,38 @@ class Array
   include GridArrayExtensions
 end
 
-require 'state-machine'
+require 'state_machine'
 
 # Representing 3 x 3 Tic Tac Toe grid of space, X's and O's.
 class Grid
   #Create new empty grid or pre-populated grid with input 2-d Array (see #validate)
   def initialize(data = nil)
-    validate data
+    if err = validate(data) then
+      raise ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only: #{err}"
+    end
     @data = data || [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
   end
 
   # Verify that initializtion data is 3 x 3 2-d array of only space, X or O
   def validate(data)
     if data
-      unless data.is_a?(Array) && data.size == 3
-        raise ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only"
-      end
+      return "data is a #{data.class}" if ! data.is_a?(Array)
+      
+      return "data size is #{data.size}" if data.size != 3
+      
       data.each do |row|
-        unless row.is_a?(Array) && row.size == 3
-          raise ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only"
-        end
+        return "row is a #{row.class}" if ! row.is_a?(Array)
+        
+        return "row size is #{row.size}" if row.size != 3
+
         row.each do |elem|
-          unless [' ','X','O'].include?(elem)
-            raise ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only"
-          end
+          return "cell contains '#{elem}'" unless [' ','X','O'].include?(elem)
+
         end
       end
-
     end
+    
+    return nil
   end
 
   #Retrieve state (space, X, O) of single game space, indexed as zero-based 2-d

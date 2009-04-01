@@ -76,27 +76,27 @@ describe Grid do
   describe "with invalid initial data" do
 
     it "should not allow non-Array" do
-      lambda {Grid.new("")}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only")
+      lambda {Grid.new("")}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only: data is a String")
     end
 
     it "should not allow 1-d Array" do
-      lambda {Grid.new([])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only")
+      lambda {Grid.new([])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only: data size is 0")
     end
 
     it "should not allow 2nd-d non-Array" do
-      lambda {Grid.new(['', '', ''])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only")
+      lambda {Grid.new(['', '', ''])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only: row is a String")
     end
 
     it "should require 1st-d Array size 3" do
-      lambda {Grid.new([[], []])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only")
+      lambda {Grid.new([[], []])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only: data size is 2")
     end
 
     it "should require 2nd-d Arrays size 3" do
-      lambda {Grid.new([[], [], []])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only")
+      lambda {Grid.new([[], [], []])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only: row size is 0")
     end
 
     it "should limit seed elements to space, X, O" do
-      lambda {Grid.new([[nil,nil,nil], [nil,nil,nil], [nil,nil,nil]])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only")
+      lambda {Grid.new([[nil,nil,nil], [nil,nil,nil], [nil,nil,nil]])}.should raise_error(ArgumentError, "Initialization data must be 3 x 3 array of space, X, O only: cell contains ''")
     end
 
   end

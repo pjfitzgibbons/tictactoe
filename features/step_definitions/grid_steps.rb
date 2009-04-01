@@ -9,7 +9,7 @@ Given /the following grid.*/ do |data|
 #  debugger
   grid_data = data.raw
   grid_data.each do |row|
-    row.collect! {|x| x == '' ? ' ' : x}
+    row.collect! {|x| x || '' == '' ? ' ' : x}
   end
   @grid = Grid.new(grid_data)
 end
